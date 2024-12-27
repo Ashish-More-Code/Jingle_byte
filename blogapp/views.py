@@ -79,15 +79,28 @@ def bdetailshome(request,bid):
     return render(request,'bdetailfromhome.html',context)
 
 def fetchCategory(request,cat):
-    myblog=Recipepost.objects.filter(Q(type=cat)&Q(is_active=True))
     context={}
-    context['cat']=myblog
-    if not context['cat']:
-        context['nodatafoundmsg']="No posts available in this category yet. We’re working on bringing you fresh content soon!"
-        return render(request,'index.html',context)
+    search=request.GET.get('search')
+    myblog=Recipepost.objects.filter(Q(type=cat)&Q(is_active=True))
+    if not search:
+        
+        context['cat']=myblog
+        if not context['cat']:
+            context['nodatafoundmsg']="No posts available in this category yet. We’re working on bringing you fresh content soon!"
+            return render(request,'index.html',context)
+        else:
+            return render(request,'index.html',context)
     else:
-        return render(request,'index.html',context)
 
+        vector=SearchVector(
+            'title',
+            'content',
+        )
+        query = SearchQuery(search)
+        u= Recipepost.objects.annotate(rank=SearchRank(vector, query)).order_by("-rank").filter(Q(rank__gt=0) & Q(is_active=True))     
+        context['cat']=u   
+        return render(request,'index.html',context)
+    
 
 def like(request,bid):
     if request.user.is_authenticated:
