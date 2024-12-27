@@ -7,9 +7,8 @@ pip install django
 postgressql for this db configuration we need to install adapter to install it user below command:
 pip install psycopg2
 
-====================================
 
-**Features**
+=**Features**
 Implemented full-text search with PostgreSQL by which users can search recipes based on individual ingredients(main feature).
 Integrated the shortcut buttons to search recipes based on category.
 
