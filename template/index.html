@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+{% load static %}
+
+
+<!-- page heading  -->
+<div class="row">
+  <div class="p-5 text-center mb-2 bg-danger  bg-gradient text-white">
+    <h4 class="display-4 fw-bold">
+      What you want to eat Today ?
+    </h4>
+  </div>
+</div>
+<!-- page heading end -->
+<div class="row justify-content-center mx-5">
+  <div class="d-flex flex-wrap justify-content-center">
+    <div class="p-2">
+      <a href="/category/1" type="button" class="btn btn-outline-info"><b>Appetizers</b></a>
+    </div>
+    <div class="p-2">
+      <a href="/category/2" type="button" class="btn btn-outline-info"><b>Main Courses</b></a>
+    </div>
+    <div class="p-2">
+      <a href="/category/3" type="button" class="btn btn-outline-info"><b>Side Dishes</b></a>
+    </div>
+    <div class="p-2">
+      <a href="/category/4" type="button" class="btn btn-outline-info"><b>Desserts</b></a>
+    </div>
+    <div class="p-2">
+      <a href="/category/5" type="button" class="btn btn-outline-info"><b>Pastries</b></a>
+    </div>
+    <div class="p-2">
+      <a href="/category/6" type="button" class="btn btn-outline-info"><b>Beverages</b></a>
+    </div>
+    <div class="p-2">
+      <a href="/category/7" type="button" class="btn btn-outline-info"><b>Snacks</b></a>
+    </div>
+  </div>
+</div>
+
+{% if nodatafoundmsg %}
+<div class="alert alert-primary mt-5 text-center" role="alert">
+  {{nodatafoundmsg}}
+</div>
+{% else %}
+{%if cat %}
+<div class="row m-2 row-cols-1 row-cols-md-3 g-4">
+  {% for x in cat %}
+  <div class="col">
+    <div class="card h-100" style="height: 300px;">
+      <img src="{{x.pimage.url}}" class="card-img-top" alt="..." style="height: 150px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{x.title}}</h5>
+        <p class="card-text">{{x.content|truncatewords:20}}</p>
+      </div>
+      <div class="row m-1">
+        {% if x.type == 1 %}
+        
+        <p class="card-text"><small class="text-muted">Appetizers</small></p>
+        {% elif x.type == 2 %}
+        <p class="card-text"><small class="text-muted">Main Courses</small></p>
+        {% elif x.type == 3 %}
+        <p class="card-text"><small class="text-muted">Side Dishes</small></p>
+        {% elif x.type == 4 %}
+        <p class="card-text"><small class="text-muted">Desserts </small></p>
+        {% elif x.type == 5 %}
+        <p class="card-text"><small class="text-muted">Pastries</small></p>
+        {% elif x.type == 6 %}
+        <p class="card-text"><small class="text-muted">Beverages</small></p>
+        {% elif x.type == 7 %}
+        <p class="card-text"><small class="text-muted">Snacks</small></p>
+        {% endif %}
+
+        <p class="card-text"><small class="text-muted">{{x.createdate}}</small></p>
+
+        <p class="card-text">Author : {{x.userid.username}}</p>
+      </div>
+
+      <a href="/bdetailfromhome/{{x.id}}" class="btn btn-light">Read More</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<!-- trending section start -->
+<div class="row">
+  <div class="p-2 mt-2 text-center mb-2 bg-danger bg-gradient text-white">
+    <h6>
+      Trending Recipes
+    </h6>
+  </div>
+</div>
+<!-- trending section end -->
+
+<!-- crads for trending  -->
+<div class="row m-2 row-cols-1 row-cols-md-3 g-4">
+  {% for x in trending %}
+  <div class="col">
+    <div class="card h-100" style="height: 300px;">
+      <img src="{{x.pimage.url}}" class="card-img-top" alt="..." style="height: 150px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{x.title}}</h5>
+        <p class="card-text">{{x.content|truncatewords:20}}</p>
+      </div>
+      <div class="row m-1">
+        {% if x.type == 1 %}
+        <p class="card-text"><small class="text-muted">Appetizers</small></p>
+        {% elif x.type == 2 %}
+        <p class="card-text"><small class="text-muted">Main Courses</small></p>
+        {% elif x.type == 3 %}
+        <p class="card-text"><small class="text-muted">Side Dishes</small></p>
+        {% elif x.type == 4 %}
+        <p class="card-text"><small class="text-muted">Desserts </small></p>
+        {% elif x.type == 5 %}
+        <p class="card-text"><small class="text-muted">Pastries</small></p>
+        {% elif x.type == 6 %}
+        <p class="card-text"><small class="text-muted">Beverages</small></p>
+        {% elif x.type == 7 %}
+        <p class="card-text"><small class="text-muted">Snacks</small></p>
+        {% endif %}
+
+        <p class="card-text"><small class="text-muted">{{x.createdate}}</small></p>
+
+        <p class="card-text">Author : {{x.userid.username}}</p>
+      </div>
+
+      <a href="/bdetailfromhome/{{x.id}}" class="btn btn-light">Read More</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- All section start -->
+<div class="row">
+  <div class="p-2 mt-2 text-center mb-2 bg-info bg-gradient text-white">
+    <h6>
+      All Recipes
+    </h6>
+  </div>
+</div>
+<!-- All section end -->
+<!-- crads for trending  -->
+<div class="row m-2 row-cols-1 row-cols-md-3 g-4">
+  {% for x in data %}
+  <div class="col">
+    <div class="card h-100" style="height: 300px;">
+      <img src="{{x.pimage.url}}" class="card-img-top" alt="..." style="height: 150px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{x.title}}</h5>
+        <p class="card-text">{{x.content|truncatewords:20}}</p>
+      </div>
+      <div class="card-body mt position-relative mx-3">
+        <p class="card-text position-absolute bottom-0 start-0 mb-2"><small class="text-muted">{{x.createdate}}</small>
+        </p>
+      </div>
+      <div class="row m-1">
+        {% if x.type == 1 %}
+        <p class="card-text"><small class="text-muted">Appetizers </small></p>
+        {% elif x.type == 2 %}
+        <p class="card-text"><small class="text-muted">Main Courses</small></p>
+        {% elif x.type == 3 %}
+        <p class="card-text"><small class="text-muted">Side Dishes</small></p>
+        {% elif x.type == 4 %}
+        <p class="card-text"><small class="text-muted">Desserts </small></p>
+        {% elif x.type == 5 %}
+        <p class="card-text"><small class="text-muted">Pastries</small></p>
+        {% elif x.type == 6 %}
+        <p class="card-text"><small class="text-muted">Beverages</small></p>
+        {% elif x.type == 7 %}
+        <p class="card-text"><small class="text-muted">Snacks</small></p>
+        {% endif %}
+
+        <p class="card-text"><small class="text-muted">{{x.createdate}}</small></p>
+
+        <p class="card-text">Author : {{x.userid.username}}</p>
+      </div>
+      <a href="/bdetailfromhome/{{x.id}}" class="btn btn-light">Read More</a>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endif %}
+{% endblock 'main' %}

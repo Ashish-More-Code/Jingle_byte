@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+
+</head>
+
+<body>
+    <div class="row mt-5">
+        <div class="col-12">
+            <a href="/myblogs">Home</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="text-center mb-4">Create a New Recipe Post</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if errmsg %}
+            <div class="alert alert-primary mt-5" role="alert">
+                {{errmsg}}
+            </div>
+            {% endif %}
+            {% if successmsg %}
+            <div class="alert alert-primary mt-5" role="alert">
+                {{successmsg}}
+            </div>
+            {% endif %}
+            {% for x in data %}
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{x.title}}" placeholder="Enter blog title">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" rows="5" name="content" 
+                    placeholder="Enter blog content"> {{x.content}}</textarea>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% endfor %}
+
+        </form>
+    </div>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+</body>
+
+</html>

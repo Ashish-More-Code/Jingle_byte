@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+
+<body style="background-color: aliceblue;">
+    <div class="container">
+        <header class="my-4 text-center">
+            <h1>Blog</h1>
+        </header>
+        {% for x in data %}
+        <div class="row mt-5">
+            <div class="col-12">
+                <a href="/">Back</a>
+            </div>
+        </div>
+        <article class="post">
+            <img src="{{x.pimage.url}}" class="img-fluid w-100" alt="Responsive image" style="height: 400px;">
+            <h2 class="post-title display-4">{{x.title}}</h2>
+            <div class="post-content mt-4">
+                <p class="lead">{{x.content}}</p>
+            </div>
+            <div class="like-share-buttons mt-4">
+                <a href="/like/{{x.id}}" class="btn btn-primary"><i class="bi bi-heart-fill"></i>{{x.likecount}}</a>
+                <a href="/bdetailfromhome/{{x.id}}" class="btn btn-primary"><i class="bi bi-send-fill"></i></a>
+
+ 
+            </div>
+            <form action="/comment/{{x.id}}" method="POST">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" name="comm" id="comment" rows="3"
+                        placeholder="Enter your comment"></textarea>
+                </div>
+                {% if errc %}
+                <div class="alert alert-primary mt-5" role="alert">
+                    {{errc}}
+                </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary m-2">Submit</button>
+            </form>
+        </article>
+        {% endfor %}
+    </div>
+    <div class="container mt-5 mb-5">
+        <h5 class="card-title">Comments</h5>
+        {% for x in comments %}
+        <div id="comments-section">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">{{x.uid.username}}</h6>
+                    <p class="card-text">{{x.comment}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+                window.location.reload();
+            }
+        });
+
+    </script>
+    
+</body>
+
+</html>

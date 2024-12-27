@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+</head>
+
+<body style="background-color: aliceblue;">
+
+    </nav>
+
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <a href="/">Home</a>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <h1>Dashboard</h1>
+                <p class="lead">Welcome, <strong>{{user.username}}</strong></p>
+                <p> {{user.email}}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Blogs</h5>
+                        <p class="card-text display-4">{{TotalB}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Likes</h5>
+                        <p class="card-text display-4">{{LikeCount}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+
+</html>

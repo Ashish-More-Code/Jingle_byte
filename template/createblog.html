@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+
+</head>
+
+<body>
+    <div class="row mt-5">
+        <div class="col-12">
+            <a href="/">Home</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="text-center mb-4">Create a New Recipe Post</h1>
+        <form action="/createblog/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if errmsg %}
+            <div class="alert alert-primary mt-5" role="alert">
+                {{errmsg}}
+            </div>
+            {% endif %}
+            {% if successmsg %}
+            <div class="alert alert-primary mt-5" role="alert">
+                {{successmsg}}
+            </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter blog title">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" rows="5" name="content"
+                    placeholder="Enter blog content"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Related Picture</label>
+                <input type="file" class="form-control" name="pimage" id="image">
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label"> Category:</label>
+                <select id="category" name="category" class="form-control" required>
+                    <option value="1">Appetizers</option>
+                    <option value="2">Main Courses</option>
+                    <option value="3">Side Dishes </option>
+                    <option value="4">Desserts </option>
+                    <option value="5">Pastries </option>
+                    <option value="6">Beverages </option>
+                    <option value="7">Snacks</option>
+
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+</body>
+
+</html>
