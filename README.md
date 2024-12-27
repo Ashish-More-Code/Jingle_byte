@@ -17,7 +17,7 @@ pip install psycopg2
 
 **Features**
 ====================================
-**Implemented full-text search with PostgreSQL by which users can search recipes based on individual ingredients(main feature).**
+**Implemented full-text search with PostgreSQL by which users can search recipes based on individual ingredients(main feature).**<br>
 **Integrated the shortcut buttons to search recipes based on category.**
 
 
