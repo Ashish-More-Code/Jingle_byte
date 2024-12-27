@@ -1,24 +1,41 @@
+Installation:
+1>First create virtual env 
+python -m venv env
+2>install django
+pip install django
+3>database required is:
+postgressql for this db configuration we need to install adapter to install it user below command:
+pip install psycopg2
 
-Features
+.
 
+**Features**
+Implemented full-text search with PostgreSQL by which users can search recipes based on individual ingredients(main feature).
+Integrated the shortcut buttons to search recipes based on category.
+
+.
 **User Authentication**
 Users can register and log in to the portal.
 
-Create and Manage Blogs
+.
+**Create and Manage Blogs**
 Post new Recipe blogs.
 Edit and delete Recipe blogs from "Your Recipe" section.
 
-Dashboard
+.
+**Dashboard**
 View the total number of Recipe posted by the user.
 View the combined total number of Recipe and likes.
 
-Home Page
+.
+**Home Page**
 Browse and read all Recipe.
 Filter Recipes by category.
 Like and comment on Recipe blog.
 users can like Recipe only once.
 
-Recipe Blog Approval System
+.
+**Recipe Blog Approval System**
 
 Overview
 
