@@ -1,9 +1,11 @@
 Installation:
 ====================================
 1>First create virtual env
+python -m venv env
 ====================================
 
 2>install django
+pip install django
 ====================================
 pip install django
 3>database required is:
