@@ -12,7 +12,7 @@ pip install psycopg2
 Implemented full-text search with PostgreSQL by which users can search recipes based on individual ingredients(main feature).
 Integrated the shortcut buttons to search recipes based on category.
 
-====================================
+
 **User Authentication**
 ====================================
 
@@ -24,13 +24,12 @@ Users can register and log in to the portal.
 Post new Recipe blogs.
 Edit and delete Recipe blogs from "Your Recipe" section.
 
-====================================
-
 **Dashboard**
+====================================
 View the total number of Recipe posted by the user.
 View the combined total number of Recipe and likes.
 
-====================================
+
 **Home Page**
 ====================================
 
@@ -39,7 +38,7 @@ Filter Recipes by category.
 Like and comment on Recipe blog.
 users can like Recipe only once.
 
-=====================================
+
 **Recipe Blog Approval System**
 ====================================
 
