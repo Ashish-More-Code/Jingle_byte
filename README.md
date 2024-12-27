@@ -18,7 +18,6 @@ Integrated the shortcut buttons to search recipes based on category.
 
 Users can register and log in to the portal.
 
-====================================
 **Create and Manage Blogs**
 ====================================
 
