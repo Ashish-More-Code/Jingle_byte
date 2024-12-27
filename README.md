@@ -1,14 +1,15 @@
 Installation:
 ====================================
 1>First create virtual env
-python -m venv env
+: python -m venv env
 ====================================
 
 2>install django
-pip install django
+: pip install django
 ====================================
 pip install django
 3>database required is:
+:pip install psycopg2
 ====================================
 postgressql for this db configuration we need to install adapter to install it user below command:
 pip install psycopg2
