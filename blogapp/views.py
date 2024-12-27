@@ -55,13 +55,13 @@ def handleComment(request,bid):
         context['comments']=comm
         if request.method=='POST':
             uid=User.objects.filter(id=u)
-            Recipepost = Recipepost.objects.get(id=bid) 
+            recipe_post = Recipepost.objects.get(id=bid) 
             comment=request.POST['comm']
             if comment=="":
                 context['errc']="Comments cannot be empty!"
                 return render(request,'bdetailfromhome.html',context)
             else:
-                u=comments.objects.create(uid=uid[0],bid=Recipepost,comment=comment)
+                u=comments.objects.create(uid=uid[0],bid=recipe_post,comment=comment)
                 u.save()
                 return render(request,'bdetailfromhome.html',context)
         else:
