@@ -3,18 +3,33 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
 from datetime import datetime
-from django.db.models import Count
+from django.db.models import Count,Q
 from blogapp.models import Recipepost,Like,comments
+from django.contrib.postgres.search import (SearchVector, SearchQuery ,SearchRank ,TrigramSimilarity)
+
 
 # Create your views here.
 
 def home(request):
-    u = Recipepost.objects.filter(is_active=True)
+    search=request.GET.get('search')
     context = {}
+    if not search:
+        u = Recipepost.objects.filter(is_active=True)
+        trending_posts = Recipepost.objects.filter(is_active=True).order_by('-likecount')
+        context['trending'] = trending_posts  
+        
+    else:
+        vector=SearchVector(
+            'title',
+            'content',
+        )
+        query = SearchQuery(search)
+        u= Recipepost.objects.annotate(rank=SearchRank(vector, query)).order_by("-rank").filter(Q(rank__gt=0) & Q(is_active=True))        
+    
     context['data'] = u
-    trending_posts = Recipepost.objects.filter(is_active=True).order_by('-likecount')
-    context['trending'] = trending_posts    
     return render(request,'index.html',context)
+
+
 
 def about(request):
     return render(request,'about.html')
@@ -64,7 +79,7 @@ def bdetailshome(request,bid):
     return render(request,'bdetailfromhome.html',context)
 
 def fetchCategory(request,cat):
-    myblog=Recipepost.objects.filter(type=cat)
+    myblog=Recipepost.objects.filter(Q(type=cat)&Q(is_active=True))
     context={}
     context['cat']=myblog
     if not context['cat']:
